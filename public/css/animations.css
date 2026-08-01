@@ -1,0 +1,317 @@
+@keyframes akiko-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(6px, -14px, 0) rotate(6deg); }
+}
+@keyframes akiko-drift {
+  0% { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 400px 0, -300px 200px, 200px -240px; }
+}
+@keyframes akiko-pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(205, 168, 106, 0.4); }
+  70% { box-shadow: 0 0 0 16px rgba(205, 168, 106, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(205, 168, 106, 0); }
+}
+@keyframes akiko-float-frame {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes akiko-gold-shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 220% 50%; }
+}
+@keyframes akiko-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.28); }
+  100% { transform: scale(1); }
+}
+@keyframes akiko-bump {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+@keyframes akiko-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes akiko-toast-in {
+  from { opacity: 0; transform: translate(-50%, 16px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+@keyframes akiko-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes akiko-count-glow {
+  0%, 100% { text-shadow: 0 0 0 rgba(205, 168, 106, 0); }
+  50% { text-shadow: 0 0 22px rgba(205, 168, 106, 0.55); }
+}
+
+.gold-text {
+  background-image: linear-gradient(100deg, var(--gold-deep) 0%, var(--gold-light) 30%, var(--gold) 50%, var(--gold-light) 70%, var(--gold-deep) 100%);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: akiko-gold-shimmer 7s linear infinite;
+}
+
+.hero__frame {
+  position: relative;
+  justify-self: center;
+  width: min(420px, 82vw);
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  animation: akiko-float-frame 7s ease-in-out infinite;
+}
+.hero__frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero__frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(205, 168, 106, 0.35), inset 0 40px 80px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+.hero__frame-caption {
+  position: absolute;
+  left: var(--s4);
+  bottom: var(--s4);
+  right: var(--s4);
+  padding: var(--s3) var(--s4);
+  background: rgba(5, 4, 3, 0.55);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-script);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--gold-light);
+}
+
+/* Reveal-on-scroll: contenuto VISIBILE di default (mai bloccato se JS non parte).
+   Solo dopo che effects.js conferma di poter osservare l'elemento aggiunge
+   "reveal-armed", che lo nasconde un istante prima di farlo riapparire animato. */
+.reveal.reveal-armed {
+  opacity: 0;
+  transform: translateY(30px) scale(0.98);
+  filter: blur(8px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0s);
+}
+.reveal.reveal-armed.is-visible { opacity: 1; transform: none; filter: blur(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal.reveal-armed { opacity: 1; transform: none; filter: none; transition: none; }
+}
+
+/* Showcase: sezione a scroll pinnato in stile Apple, la foto si ingrandisce
+   mentre scorri, il testo sfuma. Il posizionamento (fixed mentre e' in
+   range, absolute prima/dopo) e' calcolato da JS (effects.js initShowcase)
+   apposta per non lasciare mai un vuoto vero: con position:sticky "nudo"
+   resta sempre uno schermo intero di buco dopo che l'immagine ha finito
+   di scalare, prima che inizi la sezione dopo. */
+.showcase {
+  position: relative;
+  height: 180vh;
+}
+.showcase__sticky {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--bg);
+}
+.showcase__label {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 22ch;
+  padding: 0 var(--s4);
+  margin-bottom: var(--s6);
+  will-change: opacity, transform;
+}
+.showcase__frame {
+  width: 62%;
+  max-width: 880px;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  will-change: transform, border-radius;
+}
+.showcase__frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 767px) {
+  .showcase { height: 150vh; }
+  .showcase__frame { width: 84%; aspect-ratio: 4 / 5; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .showcase { height: auto; }
+  .showcase__sticky { position: relative; height: auto; padding: var(--s7) 0; }
+  .showcase__frame { transform: none !important; }
+}
+
+/* Header che si restringe allo scroll */
+.site-header { transition: height 0.25s ease, background 0.25s ease, box-shadow 0.25s ease; }
+.site-header.is-scrolled { height: 52px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); }
+.site-header.is-scrolled .logo img { width: 34px; height: 34px; }
+
+/* Photo-slot animato: gradiente che deriva lentamente + particelle che galleggiano, resta bellissimo anche senza foto reale */
+.photo-slot {
+  position: relative;
+  isolation: isolate;
+  animation: akiko-drift 22s linear infinite alternate;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(156, 43, 43, 0.35), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(205, 168, 106, 0.3), transparent 50%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.03) 0 12px, transparent 12px 24px);
+  background-size: 180% 180%, 200% 200%, 48px 48px;
+}
+.photo-slot::before {
+  content: "🍣";
+  position: absolute;
+  top: 14%;
+  left: 10%;
+  font-size: 1.8rem;
+  opacity: 0.35;
+  animation: akiko-float 7s ease-in-out infinite;
+  z-index: 0;
+}
+.photo-slot::after {
+  content: "🥢";
+  position: absolute;
+  bottom: 16%;
+  right: 12%;
+  font-size: 1.6rem;
+  opacity: 0.3;
+  animation: akiko-float 9s ease-in-out infinite reverse;
+  z-index: 0;
+}
+.photo-slot[data-fx="ring"]::before { content: "🍱"; top: 60%; left: 78%; }
+.photo-slot[data-fx="ring"]::after { content: "🌶️"; top: 20%; left: 55%; }
+
+/* Badge promo con anello pulsante */
+.promo__badge { animation: akiko-pulse-ring 2.6s ease-out infinite; }
+
+/* Card hover con leggero sollevamento + tilt */
+.card, .cat-preview, .dish {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--line); }
+.dish:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--gold); }
+
+/* Shimmer sul bottone primario oro, gia' impostato come sfondo in style.css */
+.btn--primary { position: relative; overflow: hidden; }
+.btn--primary:hover { animation: akiko-shimmer 1.6s linear infinite; }
+
+/* Pulsante "aggiungi al carrello": stato di conferma */
+.dish__add {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.dish__add:hover { background: var(--red-soft); transform: translateY(-2px); }
+.dish__add:active { transform: scale(0.95); }
+.dish__add.is-added { background: #3f8f52; animation: akiko-pop 0.4s ease; }
+
+/* Contatore carrello che "salta" quando cambia */
+.cart-count.is-bumped { animation: akiko-bump 0.4s ease; }
+
+/* Toast di conferma in basso */
+.akiko-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 92px;
+  z-index: 60;
+  transform: translateX(-50%);
+  background: var(--surface-2);
+  border: 1px solid var(--gold);
+  color: var(--text);
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  box-shadow: var(--shadow);
+  animation: akiko-toast-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+@media (min-width: 980px) { .akiko-toast { bottom: 32px; } }
+
+/* Ticker a scorrimento con i nomi delle categorie */
+.ticker {
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  padding: 0.7rem 0;
+  background: var(--bg-deep);
+}
+.ticker__track {
+  display: inline-flex;
+  gap: 2.5rem;
+  animation: akiko-marquee 26s linear infinite;
+}
+.ticker__track span {
+  font-family: var(--font-script);
+  color: var(--gold);
+  font-size: 1.1rem;
+}
+.ticker:hover .ticker__track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track, .photo-slot, .promo__badge, .btn--primary:hover { animation: none; }
+}
+
+/* Numero animato (es. "250+ piatti") */
+.stat-number { font-family: var(--font-display); font-size: clamp(2rem, 6vw, 3.2rem); color: var(--gold); }
+.stat-number.is-counting { animation: akiko-count-glow 1.6s ease-in-out; }
+
+/* Foto reale al posto del placeholder animato: --photo passato via style inline */
+.photo-slot.has-photo {
+  background-image: var(--photo);
+  animation: none;
+}
+.photo-slot.has-photo::before, .photo-slot.has-photo::after { content: none; }
+
+/* Galleria foto */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s3);
+}
+.gallery__item {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line-soft);
+  aspect-ratio: 4 / 3;
+}
+.gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gallery__item:hover img { transform: scale(1.08); }
+.gallery__item--wide { grid-column: span 2; }
+@media (min-width: 640px) {
+  .gallery { grid-template-columns: repeat(4, 1fr); }
+  .gallery__item--wide { grid-column: span 2; }
+}

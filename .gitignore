@@ -1,0 +1,14 @@
+node_modules/
+src/db/*.db
+src/db/*.db-shm
+src/db/*.db-wal
+.env
+.env.*
+.DS_Store
+npm-debug.log*
+
+# tooling scaffolding non legata al sito
+.agents/
+.claude/
+.claude-flow/
+.swarm/

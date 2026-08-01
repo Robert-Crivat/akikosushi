@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <title>Menu — Akiko Sushi Nepi</title>
+  <meta name="description" content="Il menu completo di Akiko Sushi: antipasti, sushi, ramen, wok, pokè e dolci, con prezzi e indicazioni sugli allergeni.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css?v=10">
+  <link rel="stylesheet" href="/css/animations.css?v=10">
+  <link rel="stylesheet" href="/css/components.css?v=10">
+  <script src="/js/main.js?v=10" defer></script>
+  <script src="/js/effects.js?v=10" defer></script>
+  <script src="/js/menu.js?v=10" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="/"><img src="/images/logo.png" alt="Akiko Sushi" width="44" height="44"></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Apri il menu di navigazione">☰</button>
+      <nav class="nav" id="nav">
+        <a href="/">Home</a>
+        <a href="/menu.html" aria-current="page">Menu</a>
+        <a href="/prenotazioni.html">Prenota</a>
+        <a href="/ordina.html">Take Away</a>
+        <a href="/nepi.html">Nepi</a>
+        <a href="/vetralla.html">Cura di Vetralla</a>
+        <a class="nav-cta" href="tel:+393454386832">Chiama</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section section--tight seigaiha reveal">
+      <div class="wrap">
+        <p class="eyebrow">Alla carta e All You Can Eat</p>
+        <h1>Il menu</h1>
+        <p class="lead">Tutti i piatti disponibili nelle nostre due sedi. Tocca un piatto per vederlo in grande. Per ordinare online con ritiro al ristorante vai alla pagina <a href="/ordina.html">Take Away</a>.</p>
+      </div>
+    </section>
+
+    <div class="toolbar">
+      <div class="wrap">
+        <label for="menu-search">Cerca un piatto</label>
+        <input id="menu-search" type="search" placeholder="Es. salmone, ramen, uramaki…" autocomplete="off" data-menu-search>
+        <div class="chips" data-menu-chips></div>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="wrap">
+        <div data-menu-status class="hidden"></div>
+        <div data-menu-list>
+          <p class="lead">Caricamento menu in corso…</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight reveal">
+      <div class="wrap">
+        <div class="notice">
+          <h2>Allergeni e informazioni sanitarie</h2>
+          <p>Il pesce destinato al consumo crudo è sottoposto a trattamento di bonifica preventiva con abbattimento a -20&nbsp;°C, conforme al Regolamento CE 853/2004. Nel menu questi piatti sono contrassegnati con il simbolo <strong>#</strong>.</p>
+          <p>I piatti contrassegnati con l'asterisco <strong>*</strong> sono preparati con ingredienti surgelati all'origine.</p>
+          <p>Chi soffre di allergie o intolleranze è pregato di avvisare in anticipo il personale di sala prima di ordinare.</p>
+          <p>Possibile presenza dei seguenti allergeni nei nostri piatti:</p>
+          <ul>
+            <li>Cereali contenenti glutine</li>
+            <li>Crostacei e prodotti a base di crostacei</li>
+            <li>Uova e prodotti a base di uova</li>
+            <li>Pesce e prodotti a base di pesce</li>
+            <li>Arachidi e prodotti a base di arachidi</li>
+            <li>Soia e prodotti a base di soia</li>
+            <li>Latte e prodotti a base di latte (incluso lattosio)</li>
+            <li>Frutta a guscio</li>
+            <li>Sedano e prodotti a base di sedano</li>
+            <li>Senape e prodotti a base di senape</li>
+            <li>Semi di sesamo e prodotti a base di sesamo</li>
+            <li>Anidride solforosa e solfiti</li>
+            <li>Lupini e prodotti a base di lupini</li>
+            <li>Molluschi e prodotti a base di molluschi</li>
+          </ul>
+          <p><strong>Nota.</strong> I tag allergeni mostrati sopra ogni piatto sono generati automaticamente dagli ingredienti a scopo indicativo: chiedi sempre conferma al personale per allergie o intolleranze.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-locs" data-locations-footer>
+          <p>Caricamento sedi…</p>
+        </div>
+        <div>
+          <h3>Akiko Sushi</h3>
+          <p><a href="/menu.html">Menu</a> · <a href="/prenotazioni.html">Prenota</a> · <a href="/ordina.html">Take away</a></p>
+          <p class="footer-social">
+            <!-- PLACEHOLDER: inserire i link reali dei profili social -->
+            <a href="#" rel="noopener">Instagram</a>
+            <a href="#" rel="noopener">Facebook</a>
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span data-year>2026</span> Akiko Sushi — Nepi e Cura di Vetralla (VT). Tutti i diritti riservati.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

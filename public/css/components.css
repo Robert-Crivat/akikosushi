@@ -1,0 +1,156 @@
+/* Dialog dettaglio piatto (nativo <dialog>, niente libreria) */
+.dish-dialog {
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  width: min(560px, 92vw);
+  max-height: 88vh;
+  overflow: auto;
+  box-shadow: var(--shadow);
+}
+.dish-dialog::backdrop {
+  background: rgba(5, 4, 3, 0.78);
+  backdrop-filter: blur(4px);
+}
+.dish-dialog[open] {
+  animation: akiko-pop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dish-dialog__close-bar { position: sticky; top: 0; z-index: 2; text-align: right; height: 0; }
+.dish-dialog__close {
+  position: relative;
+  top: var(--s3);
+  right: var(--s3);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(5, 4, 3, 0.6);
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1;
+}
+.dish-dialog__close:hover { border-color: var(--gold); color: var(--gold); }
+.dish-dialog__media {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--surface-2);
+  display: grid;
+  place-items: center;
+  font-size: 4rem;
+}
+.dish-dialog__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.dish-dialog__media--icon { font-size: 5rem; }
+.dish-dialog__body { padding: var(--s5); }
+.dish-dialog__name { font-size: 1.5rem; margin-bottom: var(--s2); }
+.dish-dialog__desc { color: var(--muted); margin-bottom: var(--s3); }
+.dish-dialog__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4);
+  margin-top: var(--s4);
+  padding-top: var(--s4);
+  border-top: 1px solid var(--line-soft);
+}
+.dish-dialog__price { font-family: var(--font-display); font-size: 1.4rem; }
+
+/* Dialog di conferma ordine take away */
+.order-confirm { grid-template-columns: 1fr; width: min(480px, 92vw); }
+.order-confirm__body { padding: var(--s5); }
+.order-confirm__items { list-style: none; margin: var(--s4) 0; padding: 0; display: grid; gap: var(--s2); }
+.order-confirm__items li { display: flex; justify-content: space-between; gap: var(--s3); font-size: 0.92rem; border-bottom: 1px dashed var(--line-soft); padding-bottom: var(--s1); }
+.order-confirm__totals { border-top: 1px solid var(--line); padding-top: var(--s3); display: grid; gap: var(--s1); }
+.order-confirm__info { margin-top: var(--s4); padding-top: var(--s4); border-top: 1px solid var(--line-soft); color: var(--muted); font-size: 0.92rem; display: grid; gap: var(--s1); }
+.order-confirm .hero__actions { margin-top: var(--s5); justify-content: center; }
+
+/* Righe piatto cliccabili per aprire il dialog */
+.dish--clickable { cursor: pointer; }
+.dish--clickable:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Chip di categoria raggruppati per macro-sezione */
+.chip-group { margin-bottom: var(--s3); }
+.chip-group__label {
+  display: block;
+  font-family: var(--font-script);
+  font-style: italic;
+  color: var(--gold);
+  font-size: 0.95rem;
+  margin-bottom: var(--s2);
+}
+.chip-group__row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--s2);
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+.chip-group__row .chip { flex: 0 0 auto; }
+.chip.is-active { background: var(--gold); color: #191305; border-color: var(--gold); }
+
+/* Miniatura nella riga carrello */
+.cart__item { display: grid; grid-template-columns: 44px 1fr auto; gap: var(--s3); align-items: center; }
+.cart__item .dish__thumb { width: 44px; height: 44px; font-size: 1.1rem; }
+
+/* Barra di progresso verso lo sconto -10% */
+.discount-progress { margin: var(--s3) 0; }
+.discount-progress__bar {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.discount-progress__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-deep), var(--gold-light));
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.discount-progress__label { font-size: 0.8rem; color: var(--muted); margin-top: var(--s1); }
+.discount-progress__label strong { color: var(--gold); }
+
+/* Hero home: logo grande al centro, poi subito lo scroll-zoom (.showcase) */
+.hero-splash { padding: calc(var(--s8) + 1.5rem) 0 var(--s7); text-align: center; }
+.hero-splash__logo {
+  width: min(200px, 42vw);
+  height: min(200px, 42vw);
+  border-radius: 50%;
+  margin: 0 auto var(--s5);
+  box-shadow: var(--shadow);
+  animation: akiko-float-frame 7s ease-in-out infinite;
+}
+.hero-splash h1 { max-width: 22ch; margin-inline: auto; }
+.hero-splash .lead.center { margin-inline: auto; }
+
+/* Picker data/ora: tema scuro nativo + icona tinta oro */
+input[type="date"], input[type="time"] { color-scheme: dark; }
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(70%) sepia(28%) saturate(500%) hue-rotate(357deg) brightness(95%);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+input[type="date"]::-webkit-calendar-picker-indicator:hover,
+input[type="time"]::-webkit-calendar-picker-indicator:hover {
+  background: rgba(205, 168, 106, 0.15);
+}
+input[type="date"], input[type="time"] {
+  font-size: 1.05rem;
+  padding: 0.85rem 0.95rem;
+}
+
+@media (min-width: 600px) {
+  /* display:grid SOLO quando aperto: un <dialog> chiuso deve restare
+     display:none (comportamento nativo del browser). Se questa regola si
+     applica sempre, il dialog chiuso resta comunque presente e cliccabile
+     sopra la pagina, bloccando i click su quello che c'e' sotto. */
+  .dish-dialog[open] { display: grid; grid-template-columns: 220px 1fr; width: min(680px, 92vw); max-height: 80vh; }
+  .dish-dialog__media { aspect-ratio: auto; height: 100%; }
+  .dish-dialog__close-bar { grid-column: 1 / -1; }
+  /* Il dialog di conferma ordine non ha la colonna foto: una sola colonna,
+     piu' stretto. Specificita' alzata apposta per vincere sulla regola
+     generica .dish-dialog[open] qui sopra. */
+  .dish-dialog.order-confirm[open] { grid-template-columns: 1fr; width: min(480px, 92vw); }
+}

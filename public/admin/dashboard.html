@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="/images/logo.png">
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Pannello amministratore · Akiko Sushi</title>
+    <link rel="stylesheet" href="admin.css?v=1" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">Akiko Sushi<small>Amministrazione</small></div>
+        <nav class="nav" role="tablist" aria-label="Sezioni">
+          <button type="button" role="tab" data-tab="reservations" aria-selected="true">
+            <span>Prenotazioni</span>
+            <span class="pill" id="pill-reservations" hidden></span>
+          </button>
+          <button type="button" role="tab" data-tab="orders" aria-selected="false">
+            <span>Ordini Take Away</span>
+            <span class="pill" id="pill-orders" hidden></span>
+          </button>
+          <button type="button" role="tab" data-tab="menu" aria-selected="false">
+            <span>Menu</span>
+            <span class="pill" id="pill-menu" hidden></span>
+          </button>
+          <button type="button" role="tab" data-tab="settings" aria-selected="false">
+            <span>Impostazioni</span>
+          </button>
+        </nav>
+      </aside>
+
+      <div class="main">
+        <header class="topbar">
+          <span class="user">Connesso come <strong id="current-user">…</strong></span>
+          <button type="button" class="btn btn-sm" id="logout">Esci</button>
+        </header>
+
+        <main class="content">
+          <!-- Prenotazioni -->
+          <section class="panel" id="panel-reservations" role="tabpanel">
+            <h1>Prenotazioni</h1>
+            <div class="toolbar">
+              <div class="field">
+                <label for="res-status">Filtra per stato</label>
+                <select id="res-status">
+                  <option value="">Tutte</option>
+                  <option value="in attesa">In attesa</option>
+                  <option value="confermata">Confermata</option>
+                  <option value="rifiutata">Rifiutata</option>
+                  <option value="completata">Completata</option>
+                </select>
+              </div>
+              <button type="button" class="btn" id="res-reload">Aggiorna</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Data / Ora</th>
+                    <th>Nome</th>
+                    <th>Contatti</th>
+                    <th>Persone</th>
+                    <th>Sede</th>
+                    <th>Note</th>
+                    <th>Stato</th>
+                    <th>Ricevuta</th>
+                  </tr>
+                </thead>
+                <tbody id="res-body"></tbody>
+              </table>
+              <p class="empty" id="res-empty" hidden>Nessuna prenotazione.</p>
+            </div>
+            <p class="msg" id="res-msg" role="status" aria-live="polite"></p>
+          </section>
+
+          <!-- Ordini -->
+          <section class="panel" id="panel-orders" role="tabpanel" hidden>
+            <h1>Ordini Take Away</h1>
+            <div class="toolbar">
+              <div class="field">
+                <label for="ord-status">Filtra per stato</label>
+                <select id="ord-status">
+                  <option value="">Tutti</option>
+                  <option value="ricevuto">Ricevuto</option>
+                  <option value="in preparazione">In preparazione</option>
+                  <option value="pronto">Pronto</option>
+                  <option value="ritirato">Ritirato</option>
+                  <option value="annullato">Annullato</option>
+                </select>
+              </div>
+              <button type="button" class="btn" id="ord-reload">Aggiorna</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Ordine</th>
+                    <th>Cliente</th>
+                    <th>Ritiro</th>
+                    <th>Articoli</th>
+                    <th>Totale</th>
+                    <th>Note</th>
+                    <th>Stato</th>
+                  </tr>
+                </thead>
+                <tbody id="ord-body"></tbody>
+              </table>
+              <p class="empty" id="ord-empty" hidden>Nessun ordine.</p>
+            </div>
+            <p class="msg" id="ord-msg" role="status" aria-live="polite"></p>
+          </section>
+
+          <!-- Menu -->
+          <section class="panel" id="panel-menu" role="tabpanel" hidden>
+            <h1>Menu</h1>
+            <div id="menu-banner" class="banner banner-ok" role="status" aria-live="polite"></div>
+
+            <details class="card" id="menu-new">
+              <summary><strong>Aggiungi un nuovo piatto</strong></summary>
+              <form id="menu-new-form" style="margin-top: 1rem">
+                <div class="grid">
+                  <div class="field">
+                    <label for="new-id">ID (numero)</label>
+                    <input id="new-id" type="number" min="1" step="1" required />
+                  </div>
+                  <div class="field">
+                    <label for="new-category">Categoria</label>
+                    <input id="new-category" type="text" list="menu-categories" required />
+                    <datalist id="menu-categories"></datalist>
+                  </div>
+                  <div class="field">
+                    <label for="new-name">Nome</label>
+                    <input id="new-name" type="text" required />
+                  </div>
+                  <div class="field">
+                    <label for="new-pieces">Pezzi</label>
+                    <input id="new-pieces" type="text" placeholder="es. 8 pz" />
+                  </div>
+                  <div class="field">
+                    <label for="new-price">Prezzo (€)</label>
+                    <input id="new-price" type="number" min="0" step="0.10" />
+                  </div>
+                  <div class="field">
+                    <label for="new-description">Descrizione</label>
+                    <input id="new-description" type="text" />
+                  </div>
+                </div>
+                <div class="toolbar">
+                  <label class="check"><input type="checkbox" id="new-available" checked /> Disponibile</label>
+                  <label class="check"><input type="checkbox" id="new-frozen" /> Surgelato</label>
+                  <label class="check"><input type="checkbox" id="new-treated" /> Abbattuto</label>
+                  <label class="check"><input type="checkbox" id="new-spicy" /> Piccante</label>
+                  <label class="check"
+                    ><input type="checkbox" id="new-price-to-verify" /> Prezzo da confermare</label
+                  >
+                </div>
+                <button type="submit" class="btn btn-primary">Aggiungi piatto</button>
+                <p class="msg" id="menu-new-msg" role="status" aria-live="polite"></p>
+              </form>
+            </details>
+
+            <div class="toolbar">
+              <div class="field">
+                <label for="menu-search">Cerca</label>
+                <input id="menu-search" type="search" placeholder="Nome o descrizione…" />
+              </div>
+              <div class="field">
+                <label for="menu-category">Categoria</label>
+                <select id="menu-category">
+                  <option value="">Tutte</option>
+                </select>
+              </div>
+              <label class="check" style="margin-bottom: 0.5rem">
+                <input type="checkbox" id="menu-only-unverified" /> Solo prezzi da confermare
+              </label>
+              <button type="button" class="btn" id="menu-reload">Aggiorna</button>
+            </div>
+
+            <p class="hint" id="menu-count"></p>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Categoria</th>
+                    <th>Nome</th>
+                    <th>Pezzi</th>
+                    <th>Descrizione</th>
+                    <th>Prezzo €</th>
+                    <th>Opzioni</th>
+                    <th>Azioni</th>
+                  </tr>
+                </thead>
+                <tbody id="menu-body"></tbody>
+              </table>
+              <p class="empty" id="menu-empty" hidden>Nessun piatto trovato.</p>
+            </div>
+            <p class="msg" id="menu-msg" role="status" aria-live="polite"></p>
+          </section>
+
+          <!-- Impostazioni -->
+          <section class="panel" id="panel-settings" role="tabpanel" hidden>
+            <h1>Impostazioni</h1>
+            <div class="card card-narrow">
+              <h2>Cambia password</h2>
+              <form id="password-form" autocomplete="off" novalidate>
+                <div class="field">
+                  <label for="current-password">Password attuale</label>
+                  <input id="current-password" type="password" autocomplete="current-password" required />
+                </div>
+                <div class="field">
+                  <label for="new-password">Nuova password (min. 8 caratteri)</label>
+                  <input id="new-password" type="password" autocomplete="new-password" required />
+                </div>
+                <div class="field">
+                  <label for="confirm-password">Conferma nuova password</label>
+                  <input id="confirm-password" type="password" autocomplete="new-password" required />
+                </div>
+                <button type="submit" class="btn btn-primary">Aggiorna password</button>
+                <p class="msg" id="password-msg" role="status" aria-live="polite"></p>
+              </form>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="admin.js?v=1" defer></script>
+    <script src="admin-bookings.js?v=1" defer></script>
+    <script src="admin-menu.js?v=1" defer></script>
+  </body>
+</html>

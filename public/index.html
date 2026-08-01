@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <title>Akiko Sushi Nepi — Cucina giapponese e asiatica a Nepi e Cura di Vetralla</title>
+  <meta name="description" content="Akiko Sushi: sushi e cucina asiatica a Nepi e Cura di Vetralla (VT). Prenota un tavolo o ordina take away con il 10% di sconto sopra i 30€.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css?v=17">
+  <link rel="stylesheet" href="/css/animations.css?v=17">
+  <link rel="stylesheet" href="/css/components.css?v=17">
+  <script src="/js/main.js?v=17" defer></script>
+  <script src="/js/effects.js?v=17" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="/"><img src="/images/logo.png" alt="Akiko Sushi" width="44" height="44"></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Apri il menu di navigazione">☰</button>
+      <nav class="nav" id="nav">
+        <a href="/" aria-current="page">Home</a>
+        <a href="/menu.html">Menu</a>
+        <a href="/prenotazioni.html">Prenota</a>
+        <a href="/ordina.html">Take Away</a>
+        <a href="/nepi.html">Nepi</a>
+        <a href="/vetralla.html">Cura di Vetralla</a>
+        <a class="nav-cta" href="tel:+393454386832">Chiama</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-splash seigaiha reveal">
+      <div class="wrap center">
+        <img class="hero-splash__logo" src="/images/logo-512.png" alt="Akiko Sushi" width="220" height="220">
+        <p class="eyebrow">Akiko Sushi 🍣</p>
+        <h1 class="gold-text">Sushi e cucina asiatica nella Tuscia</h1>
+        <p class="lead center">Cucina giapponese e asiatica a Nepi e Cura di Vetralla: sushi preparato al momento, wok, ramen e curry. Formula alla carta o All You Can Eat.</p>
+        <div class="hero__actions" style="justify-content: center">
+          <a class="btn btn--primary" href="/prenotazioni.html">Prenota un tavolo</a>
+          <a class="btn btn--ghost" href="/ordina.html">Ordina take away</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="showcase" data-showcase>
+      <div class="showcase__sticky" data-showcase-sticky>
+        <h2 class="showcase__label gold-text" data-showcase-label>Cura in ogni dettaglio,<br>gusto in ogni piatto.</h2>
+        <div class="showcase__frame" data-showcase-frame>
+          <img src="/images/hero-showcase.jpg" alt="Dolce Akiko Sushi">
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>Nighiri</span><span>Uramaki</span><span>Sashimi</span><span>Ramen</span><span>Pokè</span><span>Tempura</span><span>Gunkan</span><span>Temaki</span>
+        <span>Nighiri</span><span>Uramaki</span><span>Sashimi</span><span>Ramen</span><span>Pokè</span><span>Tempura</span><span>Gunkan</span><span>Temaki</span>
+      </div>
+    </div>
+
+    <section class="section section--tight reveal">
+      <div class="wrap">
+        <div class="promo">
+          <div class="promo__badge" aria-hidden="true"><b>-10%</b><span>Take Away</span></div>
+          <div class="promo__text">
+            <h2>Take away scontato del 10%</h2>
+            <p>Con una spesa minima di 30€ e ritiro al ristorante. Lo sconto viene applicato automaticamente al tuo ordine online.</p>
+            <a class="btn btn--primary btn--small" href="/ordina.html">Inizia l'ordine</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="sedi">
+      <div class="wrap">
+        <p class="eyebrow">Dove siamo</p>
+        <h2>Le nostre sedi</h2>
+        <div class="grid grid--2" data-locations-cards>
+          <p class="lead">Caricamento sedi in corso…</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section seigaiha reveal">
+      <div class="wrap">
+        <p class="eyebrow">Un assaggio</p>
+        <h2>Il nostro menu</h2>
+        <p class="lead"><span class="stat-number" data-count-to="256">0</span>+ proposte tra antipasti, sushi, piatti caldi e dolci. Scegli la formula alla carta oppure l'All You Can Eat direttamente al ristorante.</p>
+        <div class="grid grid--3" style="margin-top: var(--s5)">
+          <div class="cat-preview reveal"><strong>Antipasti</strong><span>Involtini primavera, ravioli al vapore, gamberoni kataifi.</span></div>
+          <div class="cat-preview reveal" style="--reveal-delay:.08s"><strong>Nighiri e Sashimi</strong><span>Salmone, tonno, branzino e gamberi tagliati al momento.</span></div>
+          <div class="cat-preview reveal" style="--reveal-delay:.16s"><strong>Uramaki</strong><span>I roll della casa, dal classico al fritto croccante.</span></div>
+          <div class="cat-preview reveal" style="--reveal-delay:.24s"><strong>Ramen e Zuppe</strong><span>Brodi caldi con noodles, verdure e carne.</span></div>
+          <div class="cat-preview reveal" style="--reveal-delay:.32s"><strong>Wok e Griglia</strong><span>Pollo, manzo, anatra e spiedini alla piastra.</span></div>
+          <div class="cat-preview reveal" style="--reveal-delay:.4s"><strong>Pokè e Dolci</strong><span>Bowl fresche e dessert giapponesi.</span></div>
+        </div>
+        <div class="hero__actions">
+          <a class="btn btn--ghost" href="/menu.html">Vedi il menu completo</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="wrap">
+        <p class="eyebrow">La sala e i piatti</p>
+        <h2>Galleria</h2>
+        <div class="gallery" style="margin-top: var(--s5)">
+          <a class="gallery__item gallery__item--wide" href="/images/interno-sala-completa.jpg" target="_blank" rel="noopener">
+            <img src="/images/interno-sala-completa.jpg" alt="La sala del ristorante Akiko Sushi">
+          </a>
+          <a class="gallery__item" href="/images/interno-tavolo-fiori.jpg" target="_blank" rel="noopener">
+            <img src="/images/interno-tavolo-fiori.jpg" alt="Tavolo apparecchiato da Akiko Sushi">
+          </a>
+          <a class="gallery__item" href="/images/vassoio-sushi-vetro.jpg" target="_blank" rel="noopener">
+            <img src="/images/vassoio-sushi-vetro.jpg" alt="Vassoio misto di sushi Akiko">
+          </a>
+          <a class="gallery__item" href="/images/nighiri-salmone-piatto.jpg" target="_blank" rel="noopener">
+            <img src="/images/nighiri-salmone-piatto.jpg" alt="Nighiri di salmone">
+          </a>
+          <a class="gallery__item" href="/images/maki-salsa-teriyaki.jpg" target="_blank" rel="noopener">
+            <img src="/images/maki-salsa-teriyaki.jpg" alt="Maki con salsa teriyaki">
+          </a>
+          <a class="gallery__item" href="/images/piatto-sushi-misto.jpg" target="_blank" rel="noopener">
+            <img src="/images/piatto-sushi-misto.jpg" alt="Piatto di sushi misto">
+          </a>
+          <a class="gallery__item" href="/images/gamberi-fritti-dolce.jpg" target="_blank" rel="noopener">
+            <img src="/images/gamberi-fritti-dolce.jpg" alt="Gamberi fritti e dolce della casa">
+          </a>
+          <a class="gallery__item" href="/images/capesante.jpg" target="_blank" rel="noopener">
+            <img src="/images/capesante.jpg" alt="Capesante al limone">
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="wrap">
+        <div class="grid grid--2">
+          <div class="photo-slot has-photo" style="min-height: 260px; --photo: url('/images/interno-tavolo-fiori.jpg')" aria-hidden="true"></div>
+          <div>
+            <p class="eyebrow">Akiko 🥢</p>
+            <h2>Due formule, una sola cucina</h2>
+            <p class="lead">Puoi ordinare alla carta scegliendo piatto per piatto, oppure affidarti alla formula All You Can Eat disponibile al ristorante. Gli ordini online sono alla carta con ritiro in sede.</p>
+            <div class="hero__actions">
+              <a class="btn btn--primary" href="/prenotazioni.html">Prenota un tavolo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-locs" data-locations-footer>
+          <p>Caricamento sedi…</p>
+        </div>
+        <div>
+          <h3>Akiko Sushi</h3>
+          <p><a href="/menu.html">Menu</a> · <a href="/prenotazioni.html">Prenota</a> · <a href="/ordina.html">Take away</a></p>
+          <p class="footer-social">
+            <!-- PLACEHOLDER: inserire i link reali dei profili social -->
+            <a href="#" rel="noopener">Instagram</a>
+            <a href="#" rel="noopener">Facebook</a>
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span data-year>2026</span> Akiko Sushi — Nepi e Cura di Vetralla (VT). Tutti i diritti riservati.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

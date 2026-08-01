@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <title>Prenota un tavolo — Akiko Sushi Nepi</title>
+  <meta name="description" content="Richiedi la prenotazione di un tavolo da Akiko Sushi a Nepi o a Cura di Vetralla.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css?v=10">
+  <link rel="stylesheet" href="/css/animations.css?v=10">
+  <link rel="stylesheet" href="/css/components.css?v=10">
+  <script src="/js/main.js?v=10" defer></script>
+  <script src="/js/effects.js?v=10" defer></script>
+  <script src="/js/prenotazioni.js?v=10" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="/"><img src="/images/logo.png" alt="Akiko Sushi" width="44" height="44"></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Apri il menu di navigazione">☰</button>
+      <nav class="nav" id="nav">
+        <a href="/">Home</a>
+        <a href="/menu.html">Menu</a>
+        <a href="/prenotazioni.html" aria-current="page">Prenota</a>
+        <a href="/ordina.html">Take Away</a>
+        <a href="/nepi.html">Nepi</a>
+        <a href="/vetralla.html">Cura di Vetralla</a>
+        <a class="nav-cta" href="tel:+393454386832">Chiama</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section section--tight seigaiha reveal">
+      <div class="wrap">
+        <p class="eyebrow">Prenotazioni</p>
+        <h1>Prenota un tavolo</h1>
+        <p class="lead">Compila il modulo: riceveremo la tua richiesta e ti ricontatteremo per confermare disponibilità e orario. La prenotazione non è confermata finché non ti abbiamo risposto.</p>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="wrap">
+        <div class="grid grid--2">
+          <div class="card">
+            <div data-reservation-feedback class="hidden"></div>
+            <form data-reservation-form novalidate>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="r-name">Nome e cognome *</label>
+                  <input id="r-name" name="name" type="text" required maxlength="80" autocomplete="name">
+                </div>
+                <div class="field">
+                  <label for="r-phone">Telefono *</label>
+                  <input id="r-phone" name="phone" type="tel" required maxlength="30" autocomplete="tel">
+                </div>
+                <div class="field">
+                  <label for="r-email">Email (opzionale)</label>
+                  <input id="r-email" name="email" type="email" maxlength="120" autocomplete="email">
+                </div>
+                <div class="field">
+                  <label for="r-people">Numero di persone *</label>
+                  <input id="r-people" name="people" type="number" min="1" max="40" value="2" required>
+                </div>
+                <div class="field">
+                  <label for="r-location">Sede *</label>
+                  <select id="r-location" name="location" required data-locations-select>
+                    <option value="">Caricamento sedi…</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="r-date">Data *</label>
+                  <input id="r-date" name="date" type="date" required>
+                </div>
+                <div class="field">
+                  <label for="r-time">Ora *</label>
+                  <input id="r-time" name="time" type="time" required>
+                </div>
+                <div class="field field--full">
+                  <label for="r-notes">Note (opzionale)</label>
+                  <textarea id="r-notes" name="notes" maxlength="500" placeholder="Allergie, seggiolone, occasione speciale…"></textarea>
+                </div>
+              </div>
+              <button class="btn btn--primary" type="submit">Invia richiesta</button>
+            </form>
+          </div>
+
+          <div>
+            <div class="photo-slot has-photo" style="min-height: 220px; margin-bottom: var(--s5); --photo: url('/images/interno-sala-completa.jpg')" aria-hidden="true"></div>
+            <div class="notice">
+              <h3>Come funziona</h3>
+              <p>Le prenotazioni inviate da questo modulo sono <strong>richieste</strong>: vengono valutate dal personale del ristorante e confermate manualmente per telefono o via email. Ti chiediamo di attendere la nostra conferma prima di considerare il tavolo riservato.</p>
+              <p>Orari di apertura di entrambe le sedi: 11:30–15:00 e 18:30–23:00.</p>
+            </div>
+            <h2 style="margin-top: var(--s6)">Preferisci prenotare per telefono?</h2>
+            <div class="grid" data-locations-contacts>
+              <p class="lead">Caricamento contatti…</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-locs" data-locations-footer>
+          <p>Caricamento sedi…</p>
+        </div>
+        <div>
+          <h3>Akiko Sushi</h3>
+          <p><a href="/menu.html">Menu</a> · <a href="/prenotazioni.html">Prenota</a> · <a href="/ordina.html">Take away</a></p>
+          <p class="footer-social">
+            <!-- PLACEHOLDER: inserire i link reali dei profili social -->
+            <a href="#" rel="noopener">Instagram</a>
+            <a href="#" rel="noopener">Facebook</a>
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span data-year>2026</span> Akiko Sushi — Nepi e Cura di Vetralla (VT). Tutti i diritti riservati.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <title>Akiko Sushi Nepi — Via Roma 135A</title>
+  <meta name="description" content="Akiko Sushi Nepi: indirizzo, orari, telefono e foto della sede di Via Roma 135A a Nepi (VT).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css?v=10">
+  <link rel="stylesheet" href="/css/animations.css?v=10">
+  <link rel="stylesheet" href="/css/components.css?v=10">
+  <script src="/js/main.js?v=10" defer></script>
+  <script src="/js/effects.js?v=10" defer></script>
+  <script src="/js/location.js?v=10" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="/"><img src="/images/logo.png" alt="Akiko Sushi" width="44" height="44"></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Apri il menu di navigazione">☰</button>
+      <nav class="nav" id="nav">
+        <a href="/">Home</a>
+        <a href="/menu.html">Menu</a>
+        <a href="/prenotazioni.html">Prenota</a>
+        <a href="/ordina.html">Take Away</a>
+        <a href="/nepi.html" aria-current="page">Nepi</a>
+        <a href="/vetralla.html">Cura di Vetralla</a>
+        <a class="nav-cta" href="tel:+393454386832">Chiama</a>
+      </nav>
+    </div>
+  </header>
+
+  <main data-location-page="nepi">
+    <section class="hero seigaiha reveal">
+      <div class="wrap">
+        <div>
+          <p class="eyebrow">La sede di</p>
+          <h1 class="gold-text" data-loc-name>Akiko Sushi Nepi</h1>
+          <p class="lead" data-loc-address>Via Roma 135A, 01036 Nepi (VT)</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" data-loc-prenota href="/prenotazioni.html?location=nepi">Prenota qui</a>
+            <a class="btn btn--ghost" data-loc-ordina href="/ordina.html?location=nepi">Ordina take away</a>
+          </div>
+        </div>
+        <div class="hero__frame">
+          <img src="/images/interno-sala-completa.jpg" alt="Sala del ristorante Akiko Sushi Nepi">
+          <p class="hero__frame-caption">La sala di Nepi</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="wrap">
+        <div data-loc-status class="hidden"></div>
+        <div class="grid grid--2">
+          <div class="card">
+            <h3>Indirizzo e orari</h3>
+            <p data-loc-address>Via Roma 135A, 01036 Nepi (VT)</p>
+            <p>Orari: <span data-loc-hours>11:30–15:00 / 18:30–23:00</span></p>
+            <div class="card__links">
+              <a data-loc-tel href="tel:+393454386832">Chiama 345 438 6832</a>
+              <a data-loc-whatsapp href="#" rel="noopener" target="_blank">WhatsApp</a>
+              <a data-loc-maps href="#" rel="noopener" target="_blank">Apri in Google Maps</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Come funziona</h3>
+            <p>Alla carta o All You Can Eat, sushi preparato al momento. Puoi prenotare un tavolo o ordinare take away con ritiro direttamente in questa sede.</p>
+            <div class="card__links">
+              <a href="/menu.html">Vedi il menu completo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section seigaiha reveal">
+      <div class="wrap">
+        <p class="eyebrow">La sala e i piatti</p>
+        <h2>Galleria</h2>
+        <div class="gallery" style="margin-top: var(--s5)">
+          <a class="gallery__item gallery__item--wide" href="/images/interno-sala-completa.jpg" target="_blank" rel="noopener">
+            <img src="/images/interno-sala-completa.jpg" alt="Sala del ristorante">
+          </a>
+          <a class="gallery__item" href="/images/interno-tavolo-fiori.jpg" target="_blank" rel="noopener">
+            <img src="/images/interno-tavolo-fiori.jpg" alt="Tavolo apparecchiato">
+          </a>
+          <a class="gallery__item" href="/images/vassoio-sushi-vetro.jpg" target="_blank" rel="noopener">
+            <img src="/images/vassoio-sushi-vetro.jpg" alt="Vassoio misto di sushi">
+          </a>
+          <a class="gallery__item" href="/images/nighiri-salmone-piatto.jpg" target="_blank" rel="noopener">
+            <img src="/images/nighiri-salmone-piatto.jpg" alt="Nighiri di salmone">
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-locs" data-locations-footer>
+          <p>Caricamento sedi…</p>
+        </div>
+        <div>
+          <h3>Akiko Sushi</h3>
+          <p><a href="/menu.html">Menu</a> · <a href="/prenotazioni.html">Prenota</a> · <a href="/ordina.html">Take away</a></p>
+          <p class="footer-social">
+            <a href="#" rel="noopener">Instagram</a>
+            <a href="#" rel="noopener">Facebook</a>
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span data-year>2026</span> Akiko Sushi — Nepi e Cura di Vetralla (VT). Tutti i diritti riservati.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

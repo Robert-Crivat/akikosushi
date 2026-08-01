@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="/images/logo.png">
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Accesso amministratore · Akiko Sushi</title>
+    <link rel="stylesheet" href="admin.css?v=1" />
+  </head>
+  <body class="login-page">
+    <main class="login-card">
+      <h1>Akiko Sushi</h1>
+      <p class="subtitle">Pannello amministratore</p>
+
+      <form id="login-form" autocomplete="on" novalidate>
+        <div class="field">
+          <label for="username">Utente</label>
+          <input id="username" name="username" type="text" autocomplete="username" required autofocus />
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary" id="login-submit">Accedi</button>
+        <p class="msg msg-error" id="login-msg" role="alert" aria-live="polite"></p>
+      </form>
+    </main>
+
+    <script src="login.js?v=1" defer></script>
+  </body>
+</html>

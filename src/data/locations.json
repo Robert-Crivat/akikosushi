@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "nepi",
+    "name": "Akiko Sushi Nepi",
+    "address": "Via Roma 135A, 01036 Nepi (VT)",
+    "phone": "+393454386832",
+    "phoneDisplay": "345 438 6832",
+    "whatsapp": "393454386832",
+    "hours": "11:30–15:00 / 18:30–23:00",
+    "mapsQuery": "Akiko Sushi, Via Roma 135A, 01036 Nepi VT"
+  },
+  {
+    "slug": "vetralla",
+    "name": "Akiko Sushi Cura di Vetralla",
+    "address": "Via Cassia Cura 164, Cura di Vetralla (VT)",
+    "phone": "+393804340220",
+    "phoneDisplay": "380 434 0220",
+    "whatsapp": "393804340220",
+    "hours": "11:30–15:00 / 18:30–23:00",
+    "mapsQuery": "Akiko Sushi, Via Cassia Cura 164, Cura di Vetralla VT"
+  }
+]
