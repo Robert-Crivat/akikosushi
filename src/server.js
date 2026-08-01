@@ -4,6 +4,7 @@ const express = require('express');
 const cookieSession = require('cookie-session');
 
 const app = express();
+app.set('trust proxy', 1);
 
 const isProd = process.env.NODE_ENV === 'production';
 const allowedOrigins = (process.env.CORS_ORIGINS || '')
