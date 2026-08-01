@@ -98,6 +98,17 @@
                 <label for="o-notes">Note (opzionale)</label>
                 <textarea id="o-notes" name="notes" maxlength="500" placeholder="Allergie, intolleranze, richieste particolari…"></textarea>
               </div>
+              <fieldset class="field payment-method">
+                <legend>Come vuoi pagare? *</legend>
+                <label class="radio-option">
+                  <input type="radio" name="paymentMethod" value="online" required>
+                  <span>💳 Pagamento online</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="paymentMethod" value="in_sede" required>
+                  <span>🏠 Pagamento in sede al ritiro</span>
+                </label>
+              </fieldset>
               <button class="btn btn--primary" type="submit" disabled>Invia ordine</button>
             </form>
             <p class="cart__empty" style="margin-top: var(--s3)">Il totale definitivo viene ricalcolato dal ristorante al momento della conferma.</p>

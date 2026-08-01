@@ -154,3 +154,24 @@ input[type="date"], input[type="time"] {
      generica .dish-dialog[open] qui sopra. */
   .dish-dialog.order-confirm[open] { grid-template-columns: 1fr; width: min(480px, 92vw); }
 }
+
+.payment-method {
+  border: 1px solid var(--border, rgba(205, 168, 106, 0.3));
+  border-radius: 10px;
+  padding: 0.85rem 0.95rem;
+}
+.payment-method legend {
+  padding: 0 0.4rem;
+  font-weight: 600;
+}
+.payment-method .radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  cursor: pointer;
+}
+.payment-method .radio-option input {
+  width: auto;
+  margin: 0;
+}

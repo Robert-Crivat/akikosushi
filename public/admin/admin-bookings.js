@@ -118,6 +118,7 @@
       lines.push(Admin.el('div', { text: 'Sconto −' + Admin.money(row.discount) }));
     }
     lines.push(Admin.el('div', null, [Admin.el('strong', { text: Admin.money(row.total) })]));
+    lines.push(Admin.el('div', { text: row.payment_method === 'online' ? '💳 Pagamento online' : '🏠 Pagamento in sede' }));
     return Admin.el('div', { class: 'totals' }, lines);
   }
 

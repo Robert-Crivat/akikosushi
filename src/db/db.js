@@ -57,9 +57,15 @@ db.exec(`
     subtotal REAL NOT NULL,
     discount REAL NOT NULL DEFAULT 0,
     total REAL NOT NULL,
+    payment_method TEXT NOT NULL DEFAULT 'in_sede',
     status TEXT NOT NULL DEFAULT 'ricevuto',
     created_at TEXT NOT NULL DEFAULT (datetime('now'))
   );
 `);
+
+const orderColumns = db.prepare("PRAGMA table_info(orders)").all().map((c) => c.name);
+if (!orderColumns.includes('payment_method')) {
+  db.exec("ALTER TABLE orders ADD COLUMN payment_method TEXT NOT NULL DEFAULT 'in_sede'");
+}
 
 module.exports = db;

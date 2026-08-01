@@ -420,6 +420,7 @@
     info.appendChild(A.el('p', null, '📍 Ritiro presso: ' + details.locationName));
     info.appendChild(A.el('p', null, '🕐 Orario: ' + details.pickupTime));
     info.appendChild(A.el('p', null, '📞 ' + details.phone));
+    info.appendChild(A.el('p', null, details.paymentMethod === 'online' ? '💳 Pagamento online' : '🏠 Pagamento in sede al ritiro'));
     if (details.notes) info.appendChild(A.el('p', null, '📝 ' + details.notes));
     body.appendChild(info);
 
@@ -458,6 +459,7 @@
       location: String(data.get('location') || ''),
       pickupTime: String(data.get('pickupTime') || ''),
       notes: String(data.get('notes') || '').trim(),
+      paymentMethod: String(data.get('paymentMethod') || ''),
       items: cart.map(function (entry) {
         return { id: entry.id, qty: entry.qty };
       }),
@@ -475,6 +477,7 @@
       renderCart();
       form.reset();
       setFeedback('ok', 'Ordine inviato! Guarda il riepilogo qui sopra.');
+      document.body.classList.remove('cart-open');
       showOrderConfirmDialog({
         orderId: result && (result.orderNumber || result.orderId || result.id),
         name: payload.name,
@@ -482,6 +485,7 @@
         notes: payload.notes,
         locationName: locationName,
         pickupTime: payload.pickupTime,
+        paymentMethod: (result && result.paymentMethod) || payload.paymentMethod,
         items: cartSnapshot,
         subtotal: (result && result.subtotal) || sums.subtotal,
         discount: (result && result.discount) || sums.discount,

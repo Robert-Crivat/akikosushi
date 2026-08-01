@@ -6,6 +6,7 @@ const locations = require('../data/locations.json');
 const router = express.Router();
 
 const STATUSES = ['ricevuto', 'in preparazione', 'pronto', 'ritirato', 'annullato'];
+const PAYMENT_METHODS = ['online', 'in_sede'];
 const DISCOUNT_THRESHOLD = 30;
 const DISCOUNT_RATE = 0.1;
 
@@ -29,6 +30,7 @@ router.post('/orders/takeaway', (req, res) => {
   const location = str(body.location);
   const pickupTime = str(body.pickupTime);
   const notes = str(body.notes);
+  const paymentMethod = str(body.paymentMethod);
   const items = Array.isArray(body.items) ? body.items : null;
 
   if (!name) return res.status(400).json({ error: 'Il nome è obbligatorio.' });
@@ -36,6 +38,9 @@ router.post('/orders/takeaway', (req, res) => {
   if (!location) return res.status(400).json({ error: 'La sede di ritiro è obbligatoria.' });
   if (!isKnownLocation(location)) return res.status(400).json({ error: 'Sede non valida.' });
   if (!pickupTime) return res.status(400).json({ error: "L'orario di ritiro è obbligatorio." });
+  if (!PAYMENT_METHODS.includes(paymentMethod)) {
+    return res.status(400).json({ error: 'Scegli come vuoi pagare: online o in sede.' });
+  }
   if (!items || items.length === 0) return res.status(400).json({ error: 'Il carrello è vuoto.' });
 
   const selectItem = db.prepare('SELECT * FROM menu_items WHERE id = ? AND available = 1');
@@ -77,8 +82,8 @@ router.post('/orders/takeaway', (req, res) => {
 
   const info = db
     .prepare(`
-      INSERT INTO orders (name, phone, email, location, pickup_time, notes, items_json, subtotal, discount, total)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO orders (name, phone, email, location, pickup_time, notes, items_json, subtotal, discount, total, payment_method)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `)
     .run(
       name,
@@ -90,10 +95,11 @@ router.post('/orders/takeaway', (req, res) => {
       JSON.stringify(lines),
       subtotal,
       discount,
-      total
+      total,
+      paymentMethod
     );
 
-  res.status(201).json({ id: info.lastInsertRowid, subtotal, discount, total, status: 'ricevuto' });
+  res.status(201).json({ id: info.lastInsertRowid, subtotal, discount, total, paymentMethod, status: 'ricevuto' });
 });
 
 router.get('/admin/orders', requireAdmin, (req, res) => {
