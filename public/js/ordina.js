@@ -579,13 +579,17 @@
 
     // Se il carrello si apre per sbaglio su mobile, deve chiudersi anche
     // toccando fuori o con Esc, non solo col bottone "Chiudi carrello"
-    // (facile da mancare) o completando l'ordine.
+    // (facile da mancare) o completando l'ordine. Ascolto in fase di
+    // capture: i bottoni +/- dentro al carrello ricostruiscono la lista
+    // (renderCart) alla pressione, quindi in fase di bubble l'elemento
+    // cliccato e' gia' stato rimosso dal DOM e "cartAside.contains"
+    // darebbe sempre false, chiudendo il carrello per sbaglio.
     document.addEventListener('click', function (event) {
       if (!document.body.classList.contains('cart-open')) return;
       if (cartAside && cartAside.contains(event.target)) return;
       if (toggle && toggle.contains(event.target)) return;
       closeCart();
-    });
+    }, true);
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape') closeCart();
     });
