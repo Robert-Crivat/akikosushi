@@ -3,13 +3,14 @@ const Admin = (function () {
   const loaded = {};
 
   async function api(path, options) {
-    const opts = Object.assign({ credentials: 'same-origin' }, options);
+    const opts = Object.assign({ credentials: 'include' }, options);
     if (opts.body !== undefined && typeof opts.body !== 'string') {
       opts.headers = Object.assign({ 'Content-Type': 'application/json' }, opts.headers);
       opts.body = JSON.stringify(opts.body);
     }
 
-    const res = await fetch(path, opts);
+    const url = window.AKIKO_API_BASE && path.indexOf('/api') === 0 ? window.AKIKO_API_BASE + path : path;
+    const res = await fetch(url, opts);
     if (res.status === 401) {
       window.location.replace('login.html');
       throw new Error('Sessione scaduta.');

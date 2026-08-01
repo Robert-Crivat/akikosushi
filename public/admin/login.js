@@ -9,9 +9,10 @@
     submit.disabled = true;
 
     try {
-      const res = await fetch('/api/admin/login', {
+      const loginUrl = window.AKIKO_API_BASE ? window.AKIKO_API_BASE + '/api/admin/login' : '/api/admin/login';
+      const res = await fetch(loginUrl, {
         method: 'POST',
-        credentials: 'same-origin',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           username: document.getElementById('username').value,

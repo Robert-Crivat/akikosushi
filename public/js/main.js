@@ -8,10 +8,18 @@
     return node;
   }
 
+  function apiUrl(url) {
+    if (window.AKIKO_API_BASE && url.indexOf('/api') === 0) {
+      return window.AKIKO_API_BASE + url;
+    }
+    return url;
+  }
+
   async function fetchJSON(url, options) {
+    const opts = Object.assign({ credentials: 'include' }, options);
     let res;
     try {
-      res = await fetch(url, options);
+      res = await fetch(apiUrl(url), opts);
     } catch (err) {
       throw new Error('Connessione non riuscita. Controlla la rete e riprova.');
     }
