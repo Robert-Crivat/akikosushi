@@ -103,6 +103,7 @@
     else cart.push({ id: item.id, qty: 1, price: Number(item.price) });
     save();
     renderCart();
+    syncDishRow(item.id);
   }
 
   function changeQty(id, delta) {
@@ -115,6 +116,7 @@
     else {
       save();
       renderCart();
+      syncDishRow(id);
     }
   }
 
@@ -124,6 +126,7 @@
     });
     save();
     renderCart();
+    syncDishRow(id);
   }
 
   function tagsFor(item) {
@@ -146,25 +149,83 @@
     return box;
   }
 
-  function flashAdded(item, btn) {
+  function flashAdded(item) {
     addToCart(item);
-    if (btn) {
-      btn.textContent = '✓ Aggiunto';
-      btn.classList.add('is-added');
-      window.setTimeout(function () {
-        btn.textContent = '+ Aggiungi';
-        btn.classList.remove('is-added');
-      }, 900);
-    }
     if (window.AkikoFX) {
       window.AkikoFX.toast(item.name + ' aggiunto al carrello');
       cartCount.forEach(function (node) { window.AkikoFX.bump(node); });
     }
   }
 
+  // Riga del piatto nella lista: se non e' nel carrello mostra "+ Aggiungi",
+  // se e' gia' nel carrello mostra lo stepper di quantita' (come nel
+  // carrello) cosi' si vede/modifica la quantita' senza dover aprire il
+  // carrello. rowsById + syncDishRow tengono la lista in sync col carrello.
+  const rowsById = new Map();
+
+  function renderDishSide(item) {
+    const side = A.el('div', 'dish__side');
+    if (!orderable(item)) {
+      side.appendChild(A.el('span', 'dish__price dish__price--ask', 'Prezzo su richiesta, non ordinabile online'));
+      return side;
+    }
+    side.appendChild(A.el('span', 'dish__price', A.formatPrice(item.price)));
+    const entry = cart.find(function (row) {
+      return row.id === item.id;
+    });
+    if (entry) {
+      const qty = A.el('div', 'qty dish__qty');
+      const minus = A.el('button', null, '−');
+      minus.type = 'button';
+      minus.setAttribute('aria-label', 'Riduci quantità di ' + item.name);
+      minus.addEventListener('click', function (event) {
+        event.stopPropagation();
+        changeQty(item.id, -1);
+      });
+      const plus = A.el('button', null, '+');
+      plus.type = 'button';
+      plus.setAttribute('aria-label', 'Aumenta quantità di ' + item.name);
+      plus.addEventListener('click', function (event) {
+        event.stopPropagation();
+        changeQty(item.id, 1);
+      });
+      qty.appendChild(minus);
+      qty.appendChild(A.el('span', null, entry.qty));
+      qty.appendChild(plus);
+      side.appendChild(qty);
+    } else {
+      const add = A.el('button', 'dish__add', '+ Aggiungi');
+      add.type = 'button';
+      add.setAttribute('aria-label', 'Aggiungi ' + item.name + ' al carrello');
+      add.addEventListener('click', function (event) {
+        event.stopPropagation();
+        flashAdded(item);
+      });
+      side.appendChild(add);
+    }
+    return side;
+  }
+
+  function syncDishRow(id) {
+    const row = rowsById.get(id);
+    const item = menuIndex.get(id);
+    if (!row || !item) return;
+    const oldSide = row.querySelector('.dish__side');
+    const newSide = renderDishSide(item);
+    if (oldSide) row.replaceChild(newSide, oldSide);
+    else row.appendChild(newSide);
+  }
+
+  function syncAllRows() {
+    rowsById.forEach(function (row, id) {
+      syncDishRow(id);
+    });
+  }
+
   function dishRow(item) {
     const row = A.el('article', 'dish dish--clickable');
     row.dataset.name = String(item.name || '').toLowerCase();
+    row.dataset.id = String(item.id);
     row.tabIndex = 0;
     row.setAttribute('role', 'button');
     row.setAttribute('aria-label', 'Vedi dettaglio ' + item.name);
@@ -180,21 +241,8 @@
     main.appendChild(tagsFor(item));
     row.appendChild(main);
 
-    const side = A.el('div', 'dish__side');
-    if (orderable(item)) {
-      side.appendChild(A.el('span', 'dish__price', A.formatPrice(item.price)));
-      const add = A.el('button', 'dish__add', '+ Aggiungi');
-      add.type = 'button';
-      add.setAttribute('aria-label', 'Aggiungi ' + item.name + ' al carrello');
-      add.addEventListener('click', function (event) {
-        event.stopPropagation();
-        flashAdded(item, add);
-      });
-      side.appendChild(add);
-    } else {
-      side.appendChild(A.el('span', 'dish__price dish__price--ask', 'Prezzo su richiesta, non ordinabile online'));
-    }
-    row.appendChild(side);
+    row.appendChild(renderDishSide(item));
+    rowsById.set(item.id, row);
 
     function openDetail() {
       A.openDishDialog(item, orderable(item) ? {
@@ -217,6 +265,7 @@
 
   function renderMenu(items) {
     list.textContent = '';
+    rowsById.clear();
     let current = null;
     let posInCategory = 0;
     const categories = [];
@@ -513,16 +562,33 @@
   function initCartToggle() {
     const toggle = document.querySelector('[data-cart-toggle]');
     const close = document.querySelector('[data-cart-close]');
+    const cartAside = document.querySelector('.order-layout .cart');
+
+    function closeCart() {
+      document.body.classList.remove('cart-open');
+    }
+
     if (toggle) {
       toggle.addEventListener('click', function () {
         document.body.classList.add('cart-open');
       });
     }
     if (close) {
-      close.addEventListener('click', function () {
-        document.body.classList.remove('cart-open');
-      });
+      close.addEventListener('click', closeCart);
     }
+
+    // Se il carrello si apre per sbaglio su mobile, deve chiudersi anche
+    // toccando fuori o con Esc, non solo col bottone "Chiudi carrello"
+    // (facile da mancare) o completando l'ordine.
+    document.addEventListener('click', function (event) {
+      if (!document.body.classList.contains('cart-open')) return;
+      if (cartAside && cartAside.contains(event.target)) return;
+      if (toggle && toggle.contains(event.target)) return;
+      closeCart();
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') closeCart();
+    });
   }
 
   async function init() {
@@ -539,6 +605,7 @@
       const items = await refreshMenu();
       renderMenu(items);
       reconcile();
+      syncAllRows();
     } catch (err) {
       A.showError(status, err.message);
     }

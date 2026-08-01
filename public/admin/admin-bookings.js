@@ -122,6 +122,68 @@
     return Admin.el('div', { class: 'totals' }, lines);
   }
 
+  let orderDetailDialog = null;
+  function getOrderDetailDialog() {
+    if (orderDetailDialog) return orderDetailDialog;
+    orderDetailDialog = document.createElement('dialog');
+    orderDetailDialog.className = 'order-detail-dialog';
+    document.body.appendChild(orderDetailDialog);
+    orderDetailDialog.addEventListener('click', function (event) {
+      const rect = orderDetailDialog.getBoundingClientRect();
+      const inside =
+        event.clientX >= rect.left && event.clientX <= rect.right &&
+        event.clientY >= rect.top && event.clientY <= rect.bottom;
+      if (!inside) orderDetailDialog.close();
+    });
+    orderDetailDialog.addEventListener('cancel', function () {
+      orderDetailDialog.close();
+    });
+    return orderDetailDialog;
+  }
+
+  function showOrderDetail(row) {
+    const dlg = getOrderDetailDialog();
+    dlg.textContent = '';
+
+    const closeBar = Admin.el('div', { class: 'order-detail__close-bar' }, []);
+    const closeBtn = Admin.el('button', { type: 'button', class: 'order-detail__close', text: '✕' });
+    closeBtn.setAttribute('aria-label', 'Chiudi');
+    closeBtn.addEventListener('click', function () { dlg.close(); });
+    closeBar.append(closeBtn);
+    dlg.append(closeBar);
+
+    const body = Admin.el('div', { class: 'order-detail__body' }, [
+      Admin.el('h3', { text: '#' + row.id + ' · ' + row.name }),
+      Admin.el('p', { text: Admin.dateTime(row.created_at) }),
+      Admin.badge(row.status, VARIANTS[row.status] || 'neutral'),
+    ]);
+
+    const contactBlock = Admin.el('div', { class: 'order-detail__section' }, [
+      Admin.el('p', { text: '📞 ' + (row.phone || '—') }),
+    ]);
+    if (row.email) contactBlock.append(Admin.el('p', { text: '✉️ ' + row.email }));
+    body.append(contactBlock);
+
+    body.append(
+      Admin.el('div', { class: 'order-detail__section' }, [
+        Admin.el('p', { text: '📍 ' + locationName(row.location) }),
+        Admin.el('p', { text: '🕐 Ritiro: ' + (row.pickup_time || '—') }),
+        Admin.el('p', { text: row.payment_method === 'online' ? '💳 Pagamento online' : '🏠 Pagamento in sede' }),
+      ])
+    );
+
+    if (row.notes) {
+      body.append(Admin.el('div', { class: 'order-detail__section' }, [Admin.el('p', { text: '📝 ' + row.notes })]));
+    }
+
+    body.append(Admin.el('h4', { text: 'Articoli' }));
+    body.append(itemList(row.items));
+    body.append(totalsCell(row));
+
+    dlg.append(body);
+    dlg.showModal();
+  }
+
   async function loadOrders() {
     const query = ordFilter.value ? `?status=${encodeURIComponent(ordFilter.value)}` : '';
     let rows;
@@ -163,6 +225,11 @@
         Admin.td(row.notes || '—', 'wrap'),
         statusCell(row, ORD_STATUSES, '/api/admin/orders', ordMsg, loadOrders),
       ]);
+      tr.classList.add('row-clickable');
+      tr.addEventListener('click', function (event) {
+        if (event.target.closest('select, button, a')) return;
+        showOrderDetail(row);
+      });
       ordBody.append(tr);
     }
 

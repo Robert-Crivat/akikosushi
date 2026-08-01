@@ -483,7 +483,19 @@ label { display: block; font-size: 0.85rem; color: var(--muted); margin-bottom: 
   .order-layout .cart { position: fixed; inset: auto 0 0 0; z-index: 45; max-height: 80vh; overflow-y: auto; border-radius: var(--radius) var(--radius) 0 0; transform: translateY(110%); transition: transform 0.25s ease; }
   body.cart-open .order-layout .cart { transform: translateY(0); }
   body.cart-open .cart-bar { display: none; }
-  .cart [data-cart-close] { display: block; margin-bottom: var(--s3); }
+  .cart [data-cart-close] {
+    display: block;
+    width: 100%;
+    margin-bottom: var(--s3);
+    padding: var(--s3);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: 0.95rem;
+    text-decoration: none;
+    text-align: center;
+  }
   .order-layout { padding-bottom: 90px; }
 }
 

@@ -458,6 +458,63 @@ td input:not([type='checkbox']) {
   color: var(--gold);
 }
 
+tbody tr.row-clickable {
+  cursor: pointer;
+}
+tbody tr.row-clickable:hover {
+  background: var(--surface-2);
+}
+
+.order-detail-dialog {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  padding: 0;
+  width: min(480px, 92vw);
+  max-height: 85vh;
+}
+.order-detail-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+.order-detail__close-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem;
+}
+.order-detail__close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.3rem 0.5rem;
+}
+.order-detail__close:hover {
+  color: var(--text);
+}
+.order-detail__body {
+  padding: 0 1.25rem 1.25rem;
+  overflow-y: auto;
+}
+.order-detail__body h3 {
+  margin: 0 0 0.25rem;
+}
+.order-detail__body h4 {
+  margin: 1rem 0 0.4rem;
+  color: var(--gold);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.order-detail__section {
+  margin-top: 0.6rem;
+}
+.order-detail__section p {
+  margin: 0.15rem 0;
+}
+
 /* ---------- responsive ---------- */
 
 @media (max-width: 800px) {
