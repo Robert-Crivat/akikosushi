@@ -9,7 +9,15 @@ npm-debug.log*
 
 # tooling scaffolding non legata al sito
 .agents/
-.claude/
+.claude/*
+!.claude/agents/
+.claude/agents/*
+!.claude/agents/*.md
+!.claude/commands/
+.claude/commands/*
+!.claude/commands/avvia-progetto.md
+!.claude/commands/rilascio.md
+!.claude/commands/stato.md
 .claude-flow/
 .swarm/
 
